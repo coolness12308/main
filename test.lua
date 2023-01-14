@@ -343,9 +343,12 @@ function Main:Tab(Text0,Image0,Callback)
       TextButton.BackgroundColor3 = getgenv().SavedColor
         getgenv().bindconnect2 = TextButton.MouseButton1Down:Connect(function()
         TextButton.Text = "Press any key..."
+        pcall(function()
         if getgenv().bindconnect then
             getgenv().bindconnect:Disconnect()
+            wait()
         end
+        end)
         getgenv().bindconnect = UIS.InputBegan:Connect(function(key, gameProcessed)
         if not gameProcessed and key.KeyCode then
           local split = string.split(tostring(key.KeyCode), "Enum.KeyCode.")
@@ -357,7 +360,6 @@ function Main:Tab(Text0,Image0,Callback)
         end)
         end)
       end
-    end
 
     function ItemHold:Toggle(Text0, DefaultState, Callback)
       local Toggle = {}
